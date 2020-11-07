@@ -1,0 +1,33 @@
+{
+    "name": "pendalaman-database1",
+    "version": "1.0.0",
+    "description": "Pendalaman Database 1 oleh Fahrizal Satya",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build.dev": "tsc -w",
+        "build.prod": "tsc",
+        "start.dev": "nodemon dist/index.js",
+        "start": "node dist/index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/fahrizalsatya/pendalaman-database1.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/fahrizalsatya/pendalaman-database1/issues"
+    },
+    "homepage": "https://github.com/fahrizalsatya/pendalaman-database1#readme",
+    "dependencies": {
+        "@types/express": "^4.17.8",
+        "@types/mongodb": "^3.5.33",
+        "@types/mongoose": "^5.7.37",
+        "colorts": "^0.1.63",
+        "dotenv": "^8.2.0",
+        "express": "^4.17.1",
+        "mongoose": "^5.10.13",
+        "source-map-support": "^0.5.19"
+    }
+}
