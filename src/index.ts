@@ -48,10 +48,12 @@ app.get('/customers', async (req, res, next) => {
         return next(error)
     }
 
-    return res.send(customers)
+    res.json(customers)
 
 });
 
+//@routes   GET /customers/search?name= -> menampilkan data sesuai filter query yg dimasukkan
+//@routes   GET /customers/search ->menampilkan semua data
 app.get('/customers/search', async (req, res, next) => {
     let customers: CustomerType[];
     const keyword = req.query.keyword ? {
@@ -67,9 +69,12 @@ app.get('/customers/search', async (req, res, next) => {
         return next(error)
     }
 
-    return res.send(customers)
+    res.json(customers)
 })
 
+
+//@routes   GET /customers/type/:type
+//desc      Menampilkan data sesuai value params path ':type'
 app.get('/customers/type/:type', async (req, res, next) => {
     let customers: CustomerType[];
     const type = req.params.type as string;
@@ -80,7 +85,37 @@ app.get('/customers/type/:type', async (req, res, next) => {
         return next(error)
     }
 
-    return res.send(customers)
+    res.json(customers)
+})
+
+//@routes   GET /customers/state/:state
+//desc      Menampilkan data sesuai value params path ':state'
+app.get('/customers/state/:state', async (req, res, next) => {
+    let customers: CustomerType[];
+    const state = req.params.state as string;
+
+    try {
+        customers = await customerModel.getByState(state)
+    } catch (error) {
+        return next(error)
+    }
+
+    res.json(customers)
+})
+
+//@routes   GET /customers/age/:age
+//desc      Menampilkan data sesuai value params path ':age'
+app.get('/customers/age/:age', async (req, res, next) => {
+    let customers: CustomerType[];
+    const age = parseInt(req.params.age);
+
+    try {
+        customers = await customerModel.getByAge(age)
+    } catch (error) {
+        return next(error)
+    }
+
+    res.json(customers)
 })
 
 app.listen(4000, () => {

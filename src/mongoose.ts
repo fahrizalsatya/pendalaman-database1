@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import customers from './data/customers';
 
 export type CustomerType = {
     first_name: string
@@ -96,6 +95,41 @@ export class Customer {
                 $match: {
                     customer_type: {
                         $eq: type
+                    }
+                }
+            }]).exec();
+        } catch (error) {
+            throw error
+        }
+
+        return customers;
+    }
+
+    async getByState(state: string) {
+        let customers: CustomerType[];
+        try {
+            customers = await this.model.aggregate([{
+                $match: {
+                    state: {
+                        $regex: state,
+                        $options: 'i'
+                    }
+                }
+            }]).exec();
+        } catch (error) {
+            throw error
+        }
+
+        return customers;
+    }
+
+    async getByAge(age: number) {
+        let customers: CustomerType[];
+        try {
+            customers = await this.model.aggregate([{
+                $match: {
+                    age: {
+                        age: { $lt: age }
                     }
                 }
             }]).exec();
